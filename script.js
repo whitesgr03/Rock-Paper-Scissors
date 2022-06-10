@@ -1,23 +1,36 @@
 // 開始猜拳
-function PlayRound(playSelection, computerSelection) {
-
-}
-
-// 玩家選擇
-function PlayerChoose() { 
+function playRound(playSelection, computerSelection) {
     let result = '';
 
-    // 沒有輸入正確的值或按取消就不會結束
-    // do { 
-    //     result = prompt('請輸入 Rock, Paper, Scissors 開始猜拳');
-    // }
-    // while (result !== 'rock' || result !== 'paper' || result !== 'scissors' || result !== null)
+    if (playSelection === computerSelection) {
+        result = 'Draw!'
+    } else if (playSelection === 'rock' && computerSelection === 'paper' ||
+        playSelection === 'paper' && computerSelection === 'scissors' ||
+        playSelection === 'scissors' && computerSelection === 'rock') {
+        result = `You Lose! ${computerSelection} beats ${playSelection}`
+    } else {
+        result = `You Win! ${playSelection} beats ${computerSelection}`
+    }
 
-    // if (result) {
-    //     return result.toLowerCase();
-    // }
+    return result;
+}
+// 玩家選擇
+function playerChoose() { 
+    let result = '';
 
-    // return false;
+    while (result !== 'rock' && result !== 'paper' && result !== 'scissors') {
+        
+        result = prompt('請輸入 Rock, Paper, Scissors 開始猜拳')
+
+        if (result === null) {
+            alert('你已取消遊戲')
+            break;
+        } else {
+            result = result.toLowerCase()
+        }
+    }
+
+    return result;
 }
 
 // 電腦選擇
@@ -33,12 +46,13 @@ function computerPlay() {
     return gesture[rand];
 }
 
-let PlayerSelection = PlayerChoose();
+let PlayerSelection = playerChoose();
 
 // 玩家未選擇就終止
 if (PlayerSelection) {
     let computerSelection = computerPlay();
-    PlayRound(PlayerSelection, computerSelection)
+    let result = playRound(PlayerSelection, computerSelection)
+    alert(result);
 }
 
 
