@@ -6,28 +6,38 @@ function PlayRound(playSelection, computerSelection) {
 // 玩家選擇
 function PlayerChoose() { 
     let result = '';
-    do { 
-        result = prompt('請輸入 Rock, Paper, Scissors 開始猜拳');
-    }
-    while (result !== 'rock' || result !== 'paper' || result !== 'scissors' || result !== null)
 
-    if (result) {
-        return result.toLowerCase();
-    }
+    // 沒有輸入正確的值或按取消就不會結束
+    // do { 
+    //     result = prompt('請輸入 Rock, Paper, Scissors 開始猜拳');
+    // }
+    // while (result !== 'rock' || result !== 'paper' || result !== 'scissors' || result !== null)
 
-    return false;
+    // if (result) {
+    //     return result.toLowerCase();
+    // }
+
+    // return false;
 }
 
 // 電腦選擇
-function ComputerChoose() { 
+function computerPlay() { 
+    // 3 種手勢
+    let gesture = { 1: 'rock', 2: 'paper', 3: 'scissors' };
 
+    // 隨機數 1 - 3
+    let rand = 1 + Math.random() * (3 + 1 - 1);
+    rand = Math.floor(rand)
+
+    // 輸出手勢
+    return gesture[rand];
 }
 
 let PlayerSelection = PlayerChoose();
 
 // 玩家未選擇就終止
 if (PlayerSelection) {
-    let computerSelection = ComputerChoose();
+    let computerSelection = computerPlay();
     PlayRound(PlayerSelection, computerSelection)
 }
 
