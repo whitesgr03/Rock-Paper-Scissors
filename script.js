@@ -1,36 +1,49 @@
+
+// 首字母大寫
+function ucFirst(str) {
+    return str[0].toUpperCase() + str.slice(1);
+}
+
 // 開始猜拳
 function playRound(playSelection, computerSelection) {
     let result = '';
 
     if (playSelection === computerSelection) {
-        result = 'Draw!'
+        result = 'Drew!'
     } else if (playSelection === 'rock' && computerSelection === 'paper' ||
         playSelection === 'paper' && computerSelection === 'scissors' ||
         playSelection === 'scissors' && computerSelection === 'rock') {
-        result = `You Lose! ${computerSelection} beats ${playSelection}`
+        result = 'Lose'
     } else {
-        result = `You Win! ${playSelection} beats ${computerSelection}`
+        result = 'Win'
     }
+
+    playSelection = ucFirst(playSelection)
+    computerSelection = ucFirst(computerSelection);
+
+    alert(`Your Selection: ${playSelection}\nComputer Selection: ${computerSelection}`)
 
     return result;
 }
+
 // 玩家選擇
 function playerChoose() { 
-    let result = '';
+    let gesture = '';
 
-    while (result !== 'rock' && result !== 'paper' && result !== 'scissors') {
+// 未輸入正確的值之前持續循環
+    while (gesture !== 'rock' && gesture !== 'paper' && gesture !== 'scissors') {
         
-        result = prompt('請輸入 Rock, Paper, Scissors 開始猜拳')
+        gesture = prompt('請輸入 Rock, Paper, Scissors 開始猜拳')
 
-        if (result === null) {
+        if (gesture === null) {
             alert('你已取消遊戲')
             break;
         } else {
-            result = result.toLowerCase()
+            gesture = gesture.toLowerCase()
         }
     }
 
-    return result;
+    return gesture;
 }
 
 // 電腦選擇
@@ -46,65 +59,43 @@ function computerPlay() {
     return gesture[rand];
 }
 
-let PlayerSelection = playerChoose();
+function game() {
+    let round = 0;
+    let score = { win: 0, lose: 0 }
 
-// 玩家未選擇就終止
-if (PlayerSelection) {
-    let computerSelection = computerPlay();
-    let result = playRound(PlayerSelection, computerSelection)
-    alert(result);
+    while (round !== 5) {  
+        let PlayerSelection = playerChoose();
+
+        // 玩家取消選擇就終止
+        if (!PlayerSelection) {
+            break;
+        }
+
+        let computerSelection = computerPlay();
+        let result = playRound(PlayerSelection, computerSelection)
+
+        if (result === "Win") {
+            score.win++
+        } else if (result === 'Lose') {
+            score.lose++
+        }
+
+        round++
+    }
+
+    if (round !== 5) {
+        return
+    }
+    alert(`Scoreboard\nWin: ${score.win}, Lose: ${score.lose}`)
+
+    if (score.win > score.lose) {
+        alertg(`You Win!`)
+    } else if (score.win < score.lose) {
+        alert(`You Lose!`)
+    } else {
+        alert(`Drew!`)
+    }
 }
 
-
-//  PROGRAM PlayRound
-//      選擇 = {1: 剪刀, 2: 石頭, 3: 布};
-//      玩家選擇 = "";
-//      電腦選擇 = "";
-//      PROGRAM PlayerSelection
-//          玩家選擇 = prompt().toLowerCase();
-//      END;
-//      PROGRAM ComputerPlay
-//          隨機數 = Math.random();
-//          IF (隨機數是 1);
-//              THEN 電腦選擇 = 剪刀;
-//              THEN    IF ( 隨機數是 2 );
-//                      THEN 電腦選擇 = 石頭;
-//                      ELSE 電腦選擇 = 布;
-//          ENDIF;
-//      END;
-//      IF (玩家選擇石頭 && 電腦選擇剪刀 ||
-//         玩家選擇剪刀 && 電腦選擇布 ||
-//         玩家選擇布 && 電腦選擇石頭);
-//             THEN 印出 You win! 玩家選擇 beats 電腦選擇;
-//             ELSE    IF (玩家選擇石頭 && 電腦選擇布 ||
-//                         玩家選擇剪刀 && 電腦選擇石頭 ||
-//                         玩家選擇布 && 電腦選擇剪刀);
-//                         THEN 印出 You lose! 電腦選擇 beats 玩家選擇;
-//                         ELSE 印出 Draw! 電腦選擇 玩家選擇;
-//                     ENDIF;
-//      ENDIF;
-//  END;
-
-
-
-//  PROGRAM RockPaperScissors
-//      比賽 = {win: 0, lose: 0};
-//      WHILE( 對戰未滿 5 場 )
-//          玩家選擇 = prompt();
-//          電腦選擇 = Math.random();
-//          PROGRAM ComputerPlay
-//              IF (玩家選擇石頭 && 電腦選擇剪刀 ||
-//                  玩家選擇剪刀 && 電腦選擇布 ||
-//                  玩家選擇布 && 電腦選擇石頭);
-//                      THEN 比賽的 win + 1;
-//                      ELSE    IF (玩家選擇石頭 && 電腦選擇布 ||
-//                                  玩家選擇剪刀 && 電腦選擇石頭 ||
-//                                  玩家選擇布 && 電腦選擇剪刀);
-//                                  THEN 比賽的 lose + 1;
-//                                  ELSE 印出平手;
-//                              ENDIF;
-//              ENDIF;
-//           END;
-//      ENDWHILE;
-//      印出比賽;
-//  END;
+alert('Start the game');
+game();
