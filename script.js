@@ -89,7 +89,7 @@ function game() {
     alert(`Scoreboard\nWin: ${score.win}, Lose: ${score.lose}`)
 
     if (score.win > score.lose) {
-        alertg(`You Win!`)
+        alert(`You Win!`)
     } else if (score.win < score.lose) {
         alert(`You Lose!`)
     } else {
@@ -97,5 +97,5 @@ function game() {
     }
 }
 
-alert('Start the game');
+alert('Start the 5 rounds game');
 game();
