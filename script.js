@@ -1,10 +1,9 @@
 
-// 首字母大寫
-function ucFirst(str) {
+
+function capitalizeFirstLetter(str) {
     return str[0].toUpperCase() + str.slice(1);
 }
 
-// 開始猜拳
 function playRound(playSelection, computerSelection) {
     let result = '';
 
@@ -18,16 +17,15 @@ function playRound(playSelection, computerSelection) {
         result = 'Win'
     }
 
-    playSelection = ucFirst(playSelection)
-    computerSelection = ucFirst(computerSelection);
+    playSelection = capitalizeFirstLetter(playSelection)
+    computerSelection = capitalizeFirstLetter(computerSelection);
 
     alert(`Your Selection: ${playSelection}\nComputer Selection: ${computerSelection}`)
 
     return result;
 }
 
-// 玩家選擇
-function playerChoose() { 
+function getPlayerChoose() { 
     let gesture = '';
 
 // 未輸入正確的值之前持續循環
@@ -46,33 +44,30 @@ function playerChoose() {
     return gesture;
 }
 
-// 電腦選擇
-function computerPlay() { 
-    // 3 種手勢
+function getComputerChoose() { 
+
     let gesture = { 1: 'rock', 2: 'paper', 3: 'scissors' };
 
-    // 隨機數 1 - 3
-    let rand = 1 + Math.random() * (3 + 1 - 1);
-    rand = Math.floor(rand)
+    let randNum = 1 + Math.random() * (3 + 1 - 1);
+    randNum = Math.floor(randNum)
 
-    // 輸出手勢
-    return gesture[rand];
+    return gesture[randNum];
 }
 
-function game() {
+function playGames() {
     let round = 0;
     let score = { win: 0, lose: 0 }
 
     while (round !== 5) {  
-        let PlayerSelection = playerChoose();
+        let playerSelection = getPlayerChoose();
 
         // 玩家取消選擇就終止
-        if (!PlayerSelection) {
+        if (!playerSelection) {
             break;
         }
 
-        let computerSelection = computerPlay();
-        let result = playRound(PlayerSelection, computerSelection)
+        let computerSelection = getComputerChoose();
+        let result = playRound(playerSelection, computerSelection)
 
         if (result === "Win") {
             score.win++
@@ -98,4 +93,4 @@ function game() {
 }
 
 alert('Start the 5 rounds game');
-game();
+playGames();
