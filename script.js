@@ -61,7 +61,7 @@ function playGames() {
                 alert(`You win the game!`)
                 alert(`Reset the game!`)
                 score = 0;
-                round = 0;
+                round = 1;
                 win_score.textContent = score;
             }, 0);
         }
