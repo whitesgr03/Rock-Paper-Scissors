@@ -59,6 +59,10 @@ function playGames() {
         if (score === 5) {
             setTimeout(() => {
                 alert(`You win the game!`)
+                alert(`Reset the game!`)
+                score = 0;
+                round = 0;
+                win_score.textContent = score;
             }, 0);
         }
         
@@ -66,5 +70,5 @@ function playGames() {
     
 }
 
-alert(`Let's play Rock, Paper, Scissors!`)
+alert(`Let's play Rock, Paper, Scissors! get 5 points to win`)
 playGames();
