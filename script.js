@@ -68,10 +68,10 @@ function createGame() {
         show_score.textContent = currentScore;
         // 如果分數小於 5 的話, 停止後續
         if (currentScore < 5) return
-            setTimeout(() => {
+        setTimeout(() => {
             // 發出獲勝訊息並重置遊戲
-                alert(`You win the game!`)
-                alert(`Reset the game!`)
+            alert(`You win the game!`)
+            alert(`Reset the game!`)
             // 現在的分數等於 0
             currentScore = 0;
             // 現在的回合數等於 1
@@ -80,8 +80,8 @@ function createGame() {
             show_score.textContent = currentScore;
         })
     }
-        }
-        
+}
+
 function getButtons() {
     // 宣告一個變數來儲存猜拳按鈕
     const buttons = document.querySelectorAll('button');
