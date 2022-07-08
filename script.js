@@ -1,3 +1,4 @@
+"use strict";
 // 此功能為更改字母大寫
 function capitalizeFirstLetter(str) {
     return str[0].toUpperCase() + str.slice(1);
