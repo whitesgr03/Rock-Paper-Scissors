@@ -3,6 +3,12 @@
 function capitalizeFirstLetter(str) {
     return str[0].toUpperCase() + str.slice(1);
 }
+// 此功能為從最小數到最大數之間獲取機率相同的隨機數
+function randomInteger(min, max) {
+    const rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+}
+
 
 function playRound(playSelection, computerSelection, round) {
     // 建立一個變數來儲存比較結果
