@@ -67,8 +67,11 @@ function playGames() {
             }, 0);
         }
         
-    }));
-    
+function getButtons() {
+    // 宣告一個變數來儲存猜拳按鈕
+    const buttons = document.querySelectorAll('button');
+    // 每一個按鈕監聽點擊事件執行 playGames
+    buttons.forEach(button => button.addEventListener('click', playGame));
 }
 
 alert(`Let's play Rock, Paper, Scissors! get 5 points to win`)
