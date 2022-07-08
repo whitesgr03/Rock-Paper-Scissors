@@ -24,47 +24,43 @@ function playRound(playSelection, computerSelection, round) {
     return result;
 }
 
-function getComputerChoose() { 
-    let gesture = { 1: 'rock', 2: 'paper', 3: 'scissors' };
+function createGame() {
+    // 建立一個變數來儲存目前的分數
+    let currentScore = 0; 
+    // 建立一個變數來儲存目前的回合數
+    let currentRound = 1;
+    // 建立一個常數來儲存元素
+    const show_score = document.querySelector('.score');
 
-    // 取 1 - 3 隨機數且機率相同
-    let randNum = 1 + Math.random() * (3 + 1 - 1);
-    randNum = Math.floor(randNum)
-
-    return gesture[randNum];
-}
-
-function playGames() {
-    let round = 1;
-    let score = 0; 
-
-    const win_score = document.querySelector('.win');
-
-    const buttons = document.querySelectorAll('button');
-
-    buttons.forEach(button => button.addEventListener('click', function () {
-        let playerSelection = this.textContent.toLowerCase();
-        let computerSelection = getComputerChoose();
-        let result = playRound(playerSelection, computerSelection, round)
-
-        switch (result) {
-            case 1: {
-                score++
-                break;
-            }
-        }
-
-        win_score.textContent = score;
-        round++
-        
-        if (score === 5) {
+    return function () {
+        // 建立一個變數來儲存玩家的選擇
+        const playerSelection = this.textContent.toLowerCase();
+        // 建立一個變數來儲存電腦的選擇
+        const computerSelection = getComputerChoose();
+        // 建立一個變數來儲存比賽的結果
+        const result = playRound(playerSelection, computerSelection, currentRound)
+        // 目前的回合數 + 1
+        currentRound++;
+        // 如果分數不是 1 的話, 停止後續
+        if (!result) return
+        // 目前的分數 + 1
+        currentScore++;
+        // 將元素的文字改目前的分數
+        show_score.textContent = currentScore;
+        // 如果分數小於 5 的話, 停止後續
+        if (currentScore < 5) return
             setTimeout(() => {
+            // 發出獲勝訊息並重置遊戲
                 alert(`You win the game!`)
                 alert(`Reset the game!`)
-                score = 0;
-                round = 1;
-                win_score.textContent = score;
-            }, 0);
+            // 現在的分數等於 0
+            currentScore = 0;
+            // 現在的回合數等於 1
+            currentRound = 1;
+            // 將元素的文字改目前的分數
+            show_score.textContent = currentScore;
+        })
+    }
         }
         
 function getButtons() {
@@ -74,5 +70,7 @@ function getButtons() {
     buttons.forEach(button => button.addEventListener('click', playGame));
 }
 
+const playGame = createGame();
+
 alert(`Let's play Rock, Paper, Scissors! get 5 points to win`)
-playGames();
+getButtons();
