@@ -9,6 +9,14 @@ function randomInteger(min, max) {
     return Math.floor(rand);
 }
 
+function getComputerChoose() { 
+    // 建立一個陣列儲存 3 種猜拳手勢
+    const GESTURE = ['rock', 'paper', 'scissors']
+    // 建立一個變數來儲存隨機數
+    const randNum = randomInteger(0, 2)
+    // 回傳手勢
+    return GESTURE[randNum];
+}
 
 function playRound(playSelection, computerSelection, round) {
     // 建立一個變數來儲存比較結果
