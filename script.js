@@ -5,22 +5,27 @@ function capitalizeFirstLetter(str) {
 }
 
 function playRound(playSelection, computerSelection, round) {
+    // 建立一個變數來儲存比較結果
     let result = 0;
 
     // 進行比較
-    if (playSelection === 'rock' && computerSelection === 'paper' ||
+    if (
+        playSelection === 'rock' && computerSelection === 'paper' ||
         playSelection === 'paper' && computerSelection === 'scissors' ||
-        playSelection === 'scissors' && computerSelection === 'rock') {
-        result = -1
-    } else if (playSelection !== computerSelection) {
+        playSelection === 'scissors' && computerSelection === 'rock' ||
+        playSelection === computerSelection
+    ) {
+        result = 0
+    } else {
         result = 1
     }
-
+    // 將玩家選擇的字串首字母轉成大寫
     playSelection = capitalizeFirstLetter(playSelection)
+    // 將電腦選擇的字串首字母轉成大寫
     computerSelection = capitalizeFirstLetter(computerSelection);
 
     alert(`Round ${round}\nYour Selection: ${playSelection}\nComputer Selection: ${computerSelection}`)
-
+    // 回傳結果
     return result;
 }
 
