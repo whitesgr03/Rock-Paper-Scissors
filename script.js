@@ -1,49 +1,46 @@
 "use strict";
-// 此功能為更改字母大寫
-function capitalizeFirstLetter(str) {
-    return str[0].toUpperCase() + str.slice(1);
-}
-// 此功能為從最小數到最大數之間獲取機率相同的隨機數
-function randomInteger(min, max) {
-    const rand = min + Math.random() * (max + 1 - min);
-    return Math.floor(rand);
+
+playGame = setGame(playGame);
+
+alert(`Let's play Rock, Paper, Scissors! get 5 points to win`)
+
+getButtons();
+
+function getButtons() {
+    // 宣告一個變數來儲存猜拳按鈕
+    const buttons = document.querySelectorAll('button');
+    // 每一個按鈕監聽點擊事件執行 playGames
+    buttons.forEach(button => button.addEventListener('click', playGame));
 }
 
-function getComputerChoose() { 
-    // 建立一個陣列儲存 3 種猜拳手勢
-    const GESTURE = ['rock', 'paper', 'scissors']
-    // 建立一個變數來儲存隨機數
-    const randNum = randomInteger(0, 2)
-    // 回傳手勢
-    return GESTURE[randNum];
-}
-
-function playRound(playSelection, computerSelection, round) {
+function playGame(...arg) {
+    // 建立三個變數來儲存參數
+    let [player, com, round] = arg;
     // 建立一個變數來儲存比較結果
     let result = 0;
 
     // 進行比較
     if (
-        playSelection === 'rock' && computerSelection === 'paper' ||
-        playSelection === 'paper' && computerSelection === 'scissors' ||
-        playSelection === 'scissors' && computerSelection === 'rock' ||
-        playSelection === computerSelection
+        player === 'rock' && com === 'paper' ||
+        player === 'paper' && com === 'scissors' ||
+        player === 'scissors' && com === 'rock' ||
+        player === com
     ) {
         result = 0
     } else {
         result = 1
     }
     // 將玩家選擇的字串首字母轉成大寫
-    playSelection = capitalizeFirstLetter(playSelection)
+    player = capitalizeFirstLetter(player)
     // 將電腦選擇的字串首字母轉成大寫
-    computerSelection = capitalizeFirstLetter(computerSelection);
+    com = capitalizeFirstLetter(com);
 
-    alert(`Round ${round}\nYour Selection: ${playSelection}\nComputer Selection: ${computerSelection}`)
+    alert(`Round ${round}\nYour Selection: ${player}\nComputer Selection: ${com}`)
     // 回傳結果
     return result;
 }
 
-function createGame() {
+function setGame(playRound) {
     // 建立一個變數來儲存目前的分數
     let currentScore = 0; 
     // 建立一個變數來儲存目前的回合數
@@ -82,14 +79,20 @@ function createGame() {
     }
 }
 
-function getButtons() {
-    // 宣告一個變數來儲存猜拳按鈕
-    const buttons = document.querySelectorAll('button');
-    // 每一個按鈕監聽點擊事件執行 playGames
-    buttons.forEach(button => button.addEventListener('click', playGame));
+function getComputerChoose() { 
+    // 建立一個陣列儲存 3 種猜拳手勢
+    const GESTURE = ['rock', 'paper', 'scissors']
+    // 建立一個變數來儲存隨機數
+    const randNum = randomInteger(0, 2)
+    // 回傳手勢
+    return GESTURE[randNum];
 }
 
-const playGame = createGame();
+function randomInteger(min, max) {
+    const rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+}
 
-alert(`Let's play Rock, Paper, Scissors! get 5 points to win`)
-getButtons();
+function capitalizeFirstLetter(str) {
+    return str[0].toUpperCase() + str.slice(1);
+}
